@@ -48,4 +48,18 @@ describe('app routes', () => {
       });
   });
 
+  it('updates a book by id', async() => {
+    const book = await getBook();
+
+    return request(app)
+      .patch(`/api/v1/book/${book._id}`)
+      .send({ author: 'Stephen King' })
+      .then(res => {
+        expect(res.body).toEqual({
+          ...book,
+          author: 'Stephen King'
+        });
+      });
+  });
+
 });
