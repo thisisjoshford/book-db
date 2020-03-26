@@ -52,8 +52,8 @@ describe('app routes', () => {
     const book = await getBook();
 
     return request(app)
-      .patch(`/api/v1/book/${book._id}`)
-      .send({ author: 'Stephen King' })
+      .patch(`/api/v1/books/${book._id}`)
+      .send({ text: 'Stephen King' })
       .then(res => {
         expect(res.body).toEqual({
           ...book,
