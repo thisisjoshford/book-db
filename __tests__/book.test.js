@@ -37,5 +37,15 @@ describe('app routes', () => {
       });
   });
 
+  it('gets a book by id', async() => {
+    const book = await getBook();
 
+    return request(app)
+      .get(`/api/v1/books/${book._id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          ...book,
+        });
+      });
+  });
 });
