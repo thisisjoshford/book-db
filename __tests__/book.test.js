@@ -6,17 +6,6 @@ const connect = require('../lib/utils/connect');
 const mongoose = require('mongoose');
 
 describe('app routes', () => {
-  beforeAll(() => {
-    connect();
-  });
-
-  beforeEach(() => {
-    return mongoose.connection.dropDatabase();
-  });
-
-  afterAll(() => {
-    return mongoose.connection.close();
-  });
 
   it('creates a a book', () => {
     return request(app)
@@ -39,6 +28,7 @@ describe('app routes', () => {
 
   it('gets a book by id', async() => {
     const book = await getBook();
+    console.log(book);
 
     return request(app)
       .get(`/api/v1/books/${book._id}`)
