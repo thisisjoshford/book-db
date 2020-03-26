@@ -20,7 +20,7 @@ describe('app routes', () => {
 
   it('creates a a book', () => {
     return request(app)
-      .post('/api/v1/tweets')
+      .post('/api/v1/books')
       .send({
         author: 'Hanna French',
         title: 'Broken Harbor',
