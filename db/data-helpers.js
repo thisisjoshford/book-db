@@ -25,10 +25,10 @@ const prepare = model => JSON.parse(JSON.stringify(model));
 const prepareAll = models => models.map(prepare);
 
 // reading our models directory
-const files = fs.readdirSync('./lib/models');
+const files = fs.readdirSync('./models');
 const getters = files
   // for each file in our models directory import the model
-  .map(file => require(`../lib/models/${file}`))
+  .map(file => require(`../models/${file}`))
   // make sure that what we imported is actually a model
   .filter(Model => Model.prototype instanceof mongoose.Model)
   // for each model create a getModelName function that returns an instance of our model

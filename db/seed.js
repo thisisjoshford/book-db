@@ -11,7 +11,7 @@ module.exports = async({ booksToCreate = 100 } = {}) => {
   const genre = ['fiction', 'non-fiction'];
   const books = await Book.create([...Array(booksToCreate)].map(() => ({
     author: chance.name(),
-    title: chance.animal() + chance.word(),
+    title: chance.animal() + ' ' + chance.word(),
     genre: chance.pickone(genre)
   })));
 
