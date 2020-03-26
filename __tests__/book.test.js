@@ -2,8 +2,6 @@ const { getBook, getBooks } = require('../db/data-helpers');
 
 const request = require('supertest');
 const app = require('../lib/app');
-const connect = require('../lib/utils/connect');
-const mongoose = require('mongoose');
 
 describe('app routes', () => {
 
@@ -53,7 +51,7 @@ describe('app routes', () => {
 
     return request(app)
       .patch(`/api/v1/books/${book._id}`)
-      .send({ text: 'Stephen King' })
+      .send({ author: 'Stephen King' })
       .then(res => {
         expect(res.body).toEqual({
           ...book,
