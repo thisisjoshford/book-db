@@ -66,7 +66,7 @@ describe('app routes', () => {
     const book = await getBook();
     
     return request(app)
-      .delete(`/api/v1/tweets/${book._id}`)
+      .delete(`/api/v1/books/${book._id}`)
       .then(res => {
         expect(res.body).toEqual(book);
       });
