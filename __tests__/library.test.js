@@ -26,4 +26,15 @@ describe('app routes', () => {
         });
       });
   });
+
+  it('gets a library', async() => {
+    const library = await getLibrary();
+    return request(app)
+      .get(`/api/v1/library/${library._id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          ...library,
+        });
+      });
+  });
 });
