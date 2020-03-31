@@ -1,17 +1,19 @@
-const { getBook, getBooks } = require('../db/data-helpers');
+const { getBook, getBooks, getLibrary } = require('../db/data-helpers');
 
 const request = require('supertest');
 const app = require('../lib/app');
 
 describe('app routes', () => {
 
-  it('creates a a book', () => {
+  it('creates a a book', async() => {
+    const library = await getLibrary();
     return request(app)
       .post('/api/v1/books')
       .send({
         author: 'Hanna French',
         title: 'Broken Harbor',
-        genre: 'fiction'
+        genre: 'fiction',
+        library: library 
       })
       .then(res => {
         expect(res.body).toEqual({
@@ -19,6 +21,7 @@ describe('app routes', () => {
           author: 'Hanna French',
           title: 'Broken Harbor',
           genre: 'fiction',
+          library: library._id,
           __v: 0
         });
       });
@@ -26,8 +29,7 @@ describe('app routes', () => {
 
   it('gets a book by id', async() => {
     const book = await getBook();
-    console.log(book);
-
+    // console.log(book);
     return request(app)
       .get(`/api/v1/books/${book._id}`)
       .then(res => {
