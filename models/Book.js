@@ -13,6 +13,11 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: true,
     enum: ['fiction', 'non-fiction']
+  },
+  location:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'location',
+    required: true
   }
 });
 
