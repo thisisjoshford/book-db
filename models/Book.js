@@ -14,9 +14,9 @@ const bookSchema = new mongoose.Schema({
     required: true,
     enum: ['fiction', 'non-fiction']
   },
-  location:{
+  library:{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'location',
+    ref: 'library',
     required: true
   }
 });
