@@ -60,4 +60,14 @@ describe('app routes', () => {
         });
       });
   });
+
+  it('deletes a library by id', async() => {
+    const library = await getLibrary();
+    return request(app)
+      .delete(`/api/v1/library/${library._id}`)
+      .then(res => {
+        expect(res.body).toEqual(library);
+      });
+  });
+
 });
