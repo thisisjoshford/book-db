@@ -1,4 +1,4 @@
-const { getLibrary } = require('../db/data-helpers');
+const { getLibrary, getLibrarys } = require('../db/data-helpers');
 
 const request = require('supertest');
 const app = require('../lib/app');
@@ -35,6 +35,16 @@ describe('app routes', () => {
         expect(res.body).toEqual({
           ...library,
         });
+      });
+  });
+
+  
+  it('gets all the libraries', async() => {
+    const libraries = await getLibrarys();
+    return request(app)
+      .get('/api/v1/library/')
+      .then(res => {
+        expect(res.body).toEqual(libraries);
       });
   });
 });
