@@ -38,13 +38,26 @@ describe('app routes', () => {
       });
   });
 
-  
+
   it('gets all the libraries', async() => {
     const libraries = await getLibrarys();
     return request(app)
       .get('/api/v1/library/')
       .then(res => {
         expect(res.body).toEqual(libraries);
+      });
+  });
+
+  it('updates a library by id', async() => {
+    const library = await getLibrary();
+    return request(app)
+      .patch(`/api/v1/library/${library._id}`)
+      .send({ name: 'Alchemy Library' })
+      .then(res => {
+        expect(res.body).toEqual({
+          ...library,
+          name: 'Alchemy Library'
+        });
       });
   });
 });
