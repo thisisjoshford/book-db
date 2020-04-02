@@ -21,7 +21,7 @@ const bookSchema = new mongoose.Schema({
   }
 });
 
-bookSchema.static.genre = function() {
+bookSchema.statics.genre = function() {
   return this
     .aggregate([
       {
