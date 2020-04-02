@@ -77,16 +77,18 @@ describe('app routes', () => {
       .get('/api/v1/books/genres')
       .then(res => {
         console.log(res.body);
-        expect(res.body).toEqual([
-          { 
-            _id: 'fiction', 
-            count: expect.any(Number) 
-          }, 
+        expect(res.body).toContainEqual(
           { 
             _id: 'non-fiction', 
             count: expect.any(Number)
-          } 
-        ]);
+          }
+        );
+        expect(res.body).toContainEqual(
+          { 
+            _id: 'fiction', 
+            count: expect.any(Number)
+          }
+        );
       });
   });
 
@@ -94,7 +96,7 @@ describe('app routes', () => {
     return request(app)
       .get('/api/v1/books/topAuthor')
       .then(res => {
-        console.log(res.body);
+        // console.log(res.body);
         expect(res.body).toEqual([
           { 
             _id: expect.any(String),
@@ -111,7 +113,15 @@ describe('app routes', () => {
           { 
             _id: expect.any(String),
             count: expect.any(Number)
-          } 
+          },
+          { 
+            _id: expect.any(String),
+            count: expect.any(Number) 
+          }, 
+          { 
+            _id: expect.any(String),
+            count: expect.any(Number)
+          }
         ]);
       });
   });
