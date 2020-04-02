@@ -90,4 +90,30 @@ describe('app routes', () => {
       });
   });
 
+  it('gets authors sorted by number of books written', async() => {
+    return request(app)
+      .get('/api/v1/books/topAuthor')
+      .then(res => {
+        console.log(res.body);
+        expect(res.body).toEqual([
+          { 
+            _id: expect.any(String),
+            count: expect.any(Number) 
+          }, 
+          { 
+            _id: expect.any(String),
+            count: expect.any(Number)
+          },
+          { 
+            _id: expect.any(String),
+            count: expect.any(Number) 
+          }, 
+          { 
+            _id: expect.any(String),
+            count: expect.any(Number)
+          } 
+        ]);
+      });
+  });
+
 });
