@@ -21,12 +21,30 @@ const bookSchema = new mongoose.Schema({
   }
 });
 
-bookSchema.statics.genre = function() {
+bookSchema.statics.genreSort = function() {
   return this
     .aggregate([
       {
         '$group': {
           '_id': '$genre', 
+          'count': {
+            '$sum': 1
+          }
+        }
+      }, {
+        '$sort': {
+          'count': -1
+        }
+      }
+    ]);
+};
+
+bookSchema.statics.topAuthor = function() {
+  return this
+    .aggregate([
+      {
+        '$group': {
+          '_id': '$author', 
           'count': {
             '$sum': 1
           }
