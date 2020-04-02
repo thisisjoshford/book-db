@@ -72,4 +72,22 @@ describe('app routes', () => {
       });
   });
 
+  it('gets a count of genres', async() => {
+    return request(app)
+      .get('/api/v1/books/genres')
+      .then(res => {
+        console.log(res.body);
+        expect(res.body).toEqual([
+          { 
+            _id: 'fiction', 
+            count: expect.any(Number) 
+          }, 
+          { 
+            _id: 'non-fiction', 
+            count: expect.any(Number)
+          } 
+        ]);
+      });
+  });
+
 });
