@@ -21,4 +21,22 @@ const bookSchema = new mongoose.Schema({
   }
 });
 
+bookSchema.static.genre = function() {
+  return this
+    .aggregate([
+      {
+        '$group': {
+          '_id': '$genre', 
+          'count': {
+            '$sum': 1
+          }
+        }
+      }, {
+        '$sort': {
+          'count': -1
+        }
+      }
+    ]);
+};
+
 module.exports = mongoose.model('Book', bookSchema);
